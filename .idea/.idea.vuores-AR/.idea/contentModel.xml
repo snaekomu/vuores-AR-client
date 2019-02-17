@@ -7,11 +7,12 @@
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
+          <e p="Database.cs" t="Include" />
           <e p="DatabaseEntry.cs" t="Include" />
           <e p="DatabaseInfo.cs" t="Include" />
           <e p="Main.cs" t="Include" />
           <e p="NetworkInterface.cs" t="Include" />
-          <e p="PrefabFactory.cs" t="Include" />
+          <e p="UpdatableImage.cs" t="Include" />
         </e>
         <e p="Vuforia" t="Include">
           <e p="Databases" t="Include">

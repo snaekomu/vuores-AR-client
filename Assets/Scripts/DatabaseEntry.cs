@@ -4,23 +4,22 @@
 public class DatabaseEntry
 {
     public int id;
-    
-    public float posX;
-    public float posY;
-    public float posZ;
-
-    public float rotX;
-    public float rotY;
-    public float rotZ;
-
-    public float scaleX;
-    public float scaleY;
-    public float scaleZ;
-
-    public string content;
+    public string url;
+    public string text;
+    public Texture2D texture;
     
     public static DatabaseEntry CreateFromJSON(string jsonString)
     {
         return JsonUtility.FromJson<DatabaseEntry>(jsonString);
+    }
+
+    public void GetTexture(NetworkInterface net)
+    {
+        net.Get(url, SaveTexture);
+    }
+
+    public void SaveTexture(Texture2D texture)
+    {
+        this.texture = texture;
     }
 }

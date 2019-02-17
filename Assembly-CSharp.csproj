@@ -54,11 +54,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Database.cs" />
     <Compile Include="Assets\Scripts\DatabaseEntry.cs" />
     <Compile Include="Assets\Scripts\DatabaseInfo.cs" />
     <Compile Include="Assets\Scripts\Main.cs" />
     <Compile Include="Assets\Scripts\NetworkInterface.cs" />
-    <Compile Include="Assets\Scripts\PrefabFactory.cs" />
+    <Compile Include="Assets\Scripts\UpdatableImage.cs" />
     <None Include="Assets\Vuforia\Shaders\ColoredLines.shader" />
     <None Include="Assets\Vuforia\Shaders\CameraDiffuse.shader" />
     <None Include="Assets\Vuforia\Shaders\VertexLitWithZ.shader" />

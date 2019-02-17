@@ -1,64 +1,50 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public class NetworkInterface : MonoBehaviour
 {
-    private string res;
-    public static DatabaseInfo DBInf { get; private set; }
 
-    public delegate void Callback(string res);
-    
-    //Check and preload database info when awaken
-    private void Awake()
+    public void Get(string req, Action<String> Callback)
     {
-        if (DatabaseInfo == null)
-        {
-            GetDBInf();
-        }
-    }
-
-    // Get database info (version and length)
-    private void GetDBInf()
-    {
-        Get("localhost:3000/api/v1/dbinfo", SetDBInf);
+        StartCoroutine(GetRoutine(req, Callback));
     }
     
-    //Parse and save Database Info
-    private void SetDBInf(string res)
+    public void Get(string req, Action<Texture2D> Callback)
     {
-        DBInf = JsonUtility.FromJson<DatabaseInfo>(res);
-        Debug.Log(res);
-        Debug.Log(DBInf.length);
-        //If request works
-        //Main.GetDB();
-        //Else
-        //Main.TellPlayerToFuckOff();
+        StartCoroutine(GetRoutine(req, Callback));
     }
     
-    //Generic GET request with callback
-    //Starts GET coroutine
-    public void Get(string req, Callback callback)
-    {
-        StartCoroutine(SendRequest(req, callback));
-    }
-    
-    //GET request coroutine
-    IEnumerator SendRequest(string req, Callback callback)
+    private IEnumerator GetRoutine(string req, Action<String> Callback)
     {
         UnityWebRequest www = UnityWebRequest.Get(req);
         yield return www.SendWebRequest();
  
-        if(www.isNetworkError || www.isHttpError) {
+        if(www.isNetworkError || www.isHttpError)
+        {
             Debug.Log(www.error);
         }
-        else {
-            // Or retrieve results as binary data
-            res = www.downloadHandler.text;
-            callback(res);
+        else
+        {
+            Callback(www.downloadHandler.text);
+        }
+        
+    }
+
+    private IEnumerator GetRoutine(string req, Action<Texture2D> Callback)
+    {
+        UnityWebRequest www = UnityWebRequest.Get(req);
+        yield return www.SendWebRequest();
+ 
+        if(www.isNetworkError || www.isHttpError)
+        {
+            Debug.Log(www.error);
+        }
+        else
+        {
+            Callback(((DownloadHandlerTexture)www.downloadHandler).texture);
         }
     }
 }
