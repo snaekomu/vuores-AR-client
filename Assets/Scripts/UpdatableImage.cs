@@ -18,7 +18,7 @@ public class UpdatableImage : Image
         this.rectTransform.localScale = scale;
     }
 
-    private Sprite GetRandomSprite()
+    public static Sprite GetRandomSprite()
     {
         int r = Random.Range(0, AvailableImages.Count);
         Sprite s = AvailableImages[r];

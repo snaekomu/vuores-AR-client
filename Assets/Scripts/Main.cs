@@ -7,41 +7,42 @@ public class Main : MonoBehaviour
     [SerializeField] private NetworkInterface networkInterface;
     [SerializeField] private Database database;
     
+    private float loadProgress = 0f;
+    private static Main self;
+    private delegate void Delegate();
+
+    private int step = 0;
+
+    private Delegate[] ActionsList =
+    {
+        GetDBInf,
+        ReadDatabase,
+        GetTextures
+    };
+
+    private void Awake()
+    {
+        self = this;
+    }
+
     public void Start()
     {
-        GetDbInf();
+        Next();
+    }
+    
+    void Next()
+    {
+        ActionsList[step++];
     }
 
-    void GetDbInf()
+    void GetDBInf()
     {
-        networkInterface.Get("localhost:3000/api/v1/dbinfo/", SaveDbInf);
-    }
-
-    void SaveDbInf(string res)
-    {
-        database.SetDatabaseInfo(JsonUtility.FromJson<DatabaseInfo>(res));
-        ReadDatabase();
+        database.GetDBInf(networkInterface);
     }
 
     void ReadDatabase()
     {
-        for (int i = 0; i < database.DatabaseInfo.length; i++)
-        {
-            networkInterface.Get("localhost:3000/api/v1/id." + i.ToString(), SaveDatabaseEntry);
-        }
-    }
-
-    void SaveDatabaseEntry(string res)
-    {
-        if (database.DatabaseEntries.Count < database.DatabaseInfo.length)
-        {
-            database.AddDBEntry(JsonUtility.FromJson<DatabaseEntry>(res));
-        }
-        else if (database.DatabaseEntries.Count == database.DatabaseInfo.length)
-        {
-            database.AddDBEntry(JsonUtility.FromJson<DatabaseEntry>(res));
-            GetTextures();
-        }
+        database.ReadDatabase(networkInterface);
     }
 
     void GetTextures()
@@ -50,12 +51,26 @@ public class Main : MonoBehaviour
         {
             if (i < database.DatabaseEntries.Count)
             {
-                networkInterface.Get(database.DatabaseEntries[i].url);
+                database.DatabaseEntries[i].LoadTexture(networkInterface);
             }
             else if (i < database.DatabaseEntries.Count)
             {
-                database.DatabaseEntries[i].GetTexture(networkInterface);
+                database.DatabaseEntries[i].LoadTexture(networkInterface);
             }
         }
+    }
+
+    void ImageLoadProgress()
+    {
+        loadProgress += loadProgress + 1 / database.DatabaseEntries.Count;
+        if (loadProgress >= 1)
+        {
+            ActivateImages();   
+        }
+    }
+
+    void ActivateImages()
+    {
+        
     }
 }

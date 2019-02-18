@@ -13,7 +13,7 @@ public class DatabaseEntry
         return JsonUtility.FromJson<DatabaseEntry>(jsonString);
     }
 
-    public void GetTexture(NetworkInterface net)
+    public void LoadTexture(NetworkInterface net)
     {
         net.Get(url, SaveTexture);
     }
