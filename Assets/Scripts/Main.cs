@@ -1,76 +1,59 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Main : MonoBehaviour
 {
     [SerializeField] private NetworkInterface networkInterface;
     [SerializeField] private Database database;
     
-    private float loadProgress = 0f;
-    private static Main self;
-    private delegate void Delegate();
-
+    //private float loadProgress = 0f;
+    
+    public static Main self;
+    private delegate void StepDelegate();
     private int step = 0;
+    private StepDelegate[] ActionsList;
 
-    private Delegate[] ActionsList =
-    {
-        GetDBInf,
-        ReadDatabase,
-        GetTextures
-    };
-
-    private void Awake()
+    public void Awake()
     {
         self = this;
+        ActionsList = new StepDelegate[]{
+            GetDBInf,
+            ReadDatabase,
+            GetTextures
+        };
     }
 
+    //Start the loading process
     public void Start()
     {
-        Next();
+        Debug.Log("Starting download process");
+        Next(); 
     }
     
-    void Next()
+    //Call the next step in the loading process
+    public void Next()
     {
-        ActionsList[step++];
+        ActionsList[step++]();
     }
 
+    //Get the database information
     void GetDBInf()
     {
         database.GetDBInf(networkInterface);
     }
 
+    //Get whole database
     void ReadDatabase()
     {
         database.ReadDatabase(networkInterface);
     }
 
+    //Download textures from urls and assign them to images
     void GetTextures()
     {
-        for (int i = 0; i < database.DatabaseEntries.Count; i++)
+        UpdatableImage[] uis = FindObjectsOfType<UpdatableImage>();
+        for (int i = 0; i < uis.Length; i++)
         {
-            if (i < database.DatabaseEntries.Count)
-            {
-                database.DatabaseEntries[i].LoadTexture(networkInterface);
-            }
-            else if (i < database.DatabaseEntries.Count)
-            {
-                database.DatabaseEntries[i].LoadTexture(networkInterface);
-            }
+            uis[i].DownloadTexture(networkInterface, database);
         }
-    }
-
-    void ImageLoadProgress()
-    {
-        loadProgress += loadProgress + 1 / database.DatabaseEntries.Count;
-        if (loadProgress >= 1)
-        {
-            ActivateImages();   
-        }
-    }
-
-    void ActivateImages()
-    {
-        
     }
 }
