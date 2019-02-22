@@ -26,34 +26,43 @@ public class Main : MonoBehaviour
     public void Start()
     {
         Debug.Log("Starting download process");
-        Next(); 
+        NextStep(); 
     }
     
     //Call the next step in the loading process
-    public void Next()
+    private void NextStep()
     {
-        ActionsList[step++]();
+        if (step < ActionsList.Length)
+        {
+            ActionsList[step++]();
+        }
     }
 
     //Get the database information
-    void GetDBInf()
+    private void GetDBInf()
     {
         database.GetDBInf(networkInterface);
     }
 
     //Get whole database
-    void ReadDatabase()
+    private void ReadDatabase()
     {
         database.ReadDatabase(networkInterface);
     }
 
     //Download textures from urls and assign them to images
-    void GetTextures()
+    private void GetTextures()
     {
         UpdatableImage[] uis = FindObjectsOfType<UpdatableImage>();
         for (int i = 0; i < uis.Length; i++)
         {
             uis[i].DownloadTexture(networkInterface, database);
         }
+    }
+
+    //Simpler next function
+    public static void Next()
+    {
+        self.NextStep();
     }
 }

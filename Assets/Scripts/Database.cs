@@ -49,7 +49,7 @@ public class Database : ScriptableObject
         SetDatabaseInfo(JsonUtility.FromJson<DatabaseInfo>(res));
         UpdatableImage.SetAvailableImages(DatabaseInfo.length);
         Debug.Log("Database information saved.");
-        Main.self.Next();
+        Main.Next();
     }
     
     public void ReadDatabase(NetworkInterface net)
@@ -74,7 +74,7 @@ public class Database : ScriptableObject
             DatabaseEntry e = JsonUtility.FromJson<DatabaseEntry>(res);
             AddDBEntry(e);
             Debug.Log("Entry " + e.id.ToString() + " saved. Last entry saved.");
-            Main.self.Next();
+            Main.Next();
         }
     }
 }
