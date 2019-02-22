@@ -12,6 +12,11 @@ public class Database : ScriptableObject
     {
         DatabaseEntries = new List<DatabaseEntry>();
     }
+    
+    public void ClearList()
+    {
+        DatabaseEntries.Clear();
+    }
 
     public void AddDBEntry(DatabaseEntry entry)
     {
@@ -63,13 +68,13 @@ public class Database : ScriptableObject
     
     void SaveDatabaseEntry(string res)
     {
-        if (DatabaseEntries.Count < DatabaseInfo.length)
+        if (DatabaseEntries.Count < DatabaseInfo.length - 1)
         {
             DatabaseEntry e = JsonUtility.FromJson<DatabaseEntry>(res);
             AddDBEntry(e);
             Debug.Log("Entry " + e.id.ToString() + " saved.");
         }
-        else if (DatabaseEntries.Count == DatabaseInfo.length)
+        else if (DatabaseEntries.Count == DatabaseInfo.length - 1)
         {
             DatabaseEntry e = JsonUtility.FromJson<DatabaseEntry>(res);
             AddDBEntry(e);

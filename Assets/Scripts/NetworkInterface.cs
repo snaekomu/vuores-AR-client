@@ -18,32 +18,32 @@ public class NetworkInterface : MonoBehaviour
     
     private IEnumerator GetRoutine(string req, Action<String> Callback)
     {
-        UnityWebRequest www = UnityWebRequest.Get(req);
-        yield return www.SendWebRequest();
+        UnityWebRequest uwr = UnityWebRequest.Get(req);
+        yield return uwr.SendWebRequest();
  
-        if(www.isNetworkError || www.isHttpError)
+        if(uwr.isNetworkError || uwr.isHttpError)
         {
-            Debug.Log(www.error);
+            Debug.Log(uwr.error);
         }
         else
         {
-            Callback(www.downloadHandler.text);
+            Callback(uwr.downloadHandler.text);
         }
         
     }
 
     private IEnumerator GetRoutine(string req, Action<Texture2D> Callback)
     {
-        UnityWebRequest www = UnityWebRequest.Get(req);
-        yield return www.SendWebRequest();
+        UnityWebRequest uwr = UnityWebRequestTexture.GetTexture(req);
+        yield return uwr.SendWebRequest();
  
-        if(www.isNetworkError || www.isHttpError)
+        if(uwr.isNetworkError || uwr.isHttpError)
         {
-            Debug.Log(www.error);
+            Debug.Log(uwr.error);
         }
         else
         {
-            Callback(((DownloadHandlerTexture)www.downloadHandler).texture);
+            Callback(DownloadHandlerTexture.GetContent(uwr));
         }
     }
 }

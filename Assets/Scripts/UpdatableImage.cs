@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class UpdatableImage : Image
 {
-    public static List<int> AvailableImages;
+    public static List<int> AvailableImages = new List<int>();
     [SerializeField] private Vector3 scale;
 
     //Set the correct scale on start
@@ -44,7 +44,7 @@ public class UpdatableImage : Image
 
     public void AssignSprite(Texture2D tex)
     {
-        Sprite s = Sprite.Create(tex, new Rect(0f,0f,1f,1f), new Vector2(0.5f, 0.5f));
+        Sprite s = Sprite.Create(tex, new Rect(0f,0f,(float)tex.width,(float)tex.height), new Vector2(0.5f, 0.5f));
         this.sprite = s;
         Debug.Log("Image saved.");
     }

@@ -15,6 +15,7 @@ public class Main : MonoBehaviour
     public void Awake()
     {
         self = this;
+        database.ClearList();
         ActionsList = new StepDelegate[]{
             GetDBInf,
             ReadDatabase,
@@ -32,6 +33,7 @@ public class Main : MonoBehaviour
     //Call the next step in the loading process
     private void NextStep()
     {
+        Debug.Log("Step " + step.ToString() + " out of " + ActionsList.Length.ToString());
         if (step < ActionsList.Length)
         {
             ActionsList[step++]();
@@ -53,6 +55,7 @@ public class Main : MonoBehaviour
     //Download textures from urls and assign them to images
     private void GetTextures()
     {
+        Debug.Log("Calling updatable images");
         UpdatableImage[] uis = FindObjectsOfType<UpdatableImage>();
         for (int i = 0; i < uis.Length; i++)
         {
@@ -63,6 +66,7 @@ public class Main : MonoBehaviour
     //Simpler next function
     public static void Next()
     {
+        Debug.Log("NEXT!");
         self.NextStep();
     }
 }
