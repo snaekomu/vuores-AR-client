@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +11,11 @@ public class Database : ScriptableObject
     private void InitList()
     {
         DatabaseEntries = new List<DatabaseEntry>();
+    }
+    
+    public void ClearList()
+    {
+        DatabaseEntries.Clear();
     }
 
     public void AddDBEntry(DatabaseEntry entry)
@@ -36,5 +41,45 @@ public class Database : ScriptableObject
     public void SetDatabaseInfo(DatabaseInfo dbinf)
     {
         DatabaseInfo = dbinf;
+    }
+
+    public void GetDBInf(NetworkInterface net)
+    {
+        Debug.Log("Getting database information...");
+        net.Get("localhost:3000/api/v1/dbinfo/", SaveDBInf);
+    }
+
+    private void SaveDBInf(string res)
+    {
+        SetDatabaseInfo(JsonUtility.FromJson<DatabaseInfo>(res));
+        UpdatableImage.SetAvailableImages(DatabaseInfo.length);
+        Debug.Log("Database information saved.");
+        Main.Next();
+    }
+    
+    public void ReadDatabase(NetworkInterface net)
+    {
+        Debug.Log("Getting database entries...");
+        for (int i = 0; i < DatabaseInfo.length; i++)
+        {
+            net.Get("localhost:3000/api/v1/id." + i.ToString(), SaveDatabaseEntry);
+        }
+    }
+    
+    void SaveDatabaseEntry(string res)
+    {
+        if (DatabaseEntries.Count < DatabaseInfo.length - 1)
+        {
+            DatabaseEntry e = JsonUtility.FromJson<DatabaseEntry>(res);
+            AddDBEntry(e);
+            Debug.Log("Entry " + e.id.ToString() + " saved.");
+        }
+        else if (DatabaseEntries.Count == DatabaseInfo.length - 1)
+        {
+            DatabaseEntry e = JsonUtility.FromJson<DatabaseEntry>(res);
+            AddDBEntry(e);
+            Debug.Log("Entry " + e.id.ToString() + " saved. Last entry saved.");
+            Main.Next();
+        }
     }
 }

@@ -1,61 +1,72 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Main : MonoBehaviour
 {
     [SerializeField] private NetworkInterface networkInterface;
     [SerializeField] private Database database;
     
+    //private float loadProgress = 0f;
+    
+    public static Main self;
+    private delegate void StepDelegate();
+    private int step = 0;
+    private StepDelegate[] ActionsList;
+
+    public void Awake()
+    {
+        self = this;
+        database.ClearList();
+        ActionsList = new StepDelegate[]{
+            GetDBInf,
+            ReadDatabase,
+            GetTextures
+        };
+    }
+
+    //Start the loading process
     public void Start()
     {
-        GetDbInf();
+        Debug.Log("Starting download process");
+        NextStep(); 
     }
-
-    void GetDbInf()
+    
+    //Call the next step in the loading process
+    private void NextStep()
     {
-        networkInterface.Get("localhost:3000/api/v1/dbinfo/", SaveDbInf);
-    }
-
-    void SaveDbInf(string res)
-    {
-        database.SetDatabaseInfo(JsonUtility.FromJson<DatabaseInfo>(res));
-        ReadDatabase();
-    }
-
-    void ReadDatabase()
-    {
-        for (int i = 0; i < database.DatabaseInfo.length; i++)
+        Debug.Log("Step " + step.ToString() + " out of " + ActionsList.Length.ToString());
+        if (step < ActionsList.Length)
         {
-            networkInterface.Get("localhost:3000/api/v1/id." + i.ToString(), SaveDatabaseEntry);
+            ActionsList[step++]();
         }
     }
 
-    void SaveDatabaseEntry(string res)
+    //Get the database information
+    private void GetDBInf()
     {
-        if (database.DatabaseEntries.Count < database.DatabaseInfo.length)
+        database.GetDBInf(networkInterface);
+    }
+
+    //Get whole database
+    private void ReadDatabase()
+    {
+        database.ReadDatabase(networkInterface);
+    }
+
+    //Download textures from urls and assign them to images
+    private void GetTextures()
+    {
+        Debug.Log("Calling updatable images");
+        UpdatableImage[] uis = FindObjectsOfType<UpdatableImage>();
+        for (int i = 0; i < uis.Length; i++)
         {
-            database.AddDBEntry(JsonUtility.FromJson<DatabaseEntry>(res));
-        }
-        else if (database.DatabaseEntries.Count == database.DatabaseInfo.length)
-        {
-            database.AddDBEntry(JsonUtility.FromJson<DatabaseEntry>(res));
-            GetTextures();
+            uis[i].DownloadTexture(networkInterface, database);
         }
     }
 
-    void GetTextures()
+    //Simpler next function
+    public static void Next()
     {
-        for (int i = 0; i < database.DatabaseEntries.Count; i++)
-        {
-            if (i < database.DatabaseEntries.Count)
-            {
-                networkInterface.Get(database.DatabaseEntries[i].url);
-            }
-            else if (i < database.DatabaseEntries.Count)
-            {
-                database.DatabaseEntries[i].GetTexture(networkInterface);
-            }
-        }
+        Debug.Log("NEXT!");
+        self.NextStep();
     }
 }

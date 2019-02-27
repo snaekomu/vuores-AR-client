@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: VuforiaConfiguration
   m_EditorClassIdentifier: 
   vuforia:
-    vuforiaLicenseKey: 
+    vuforiaLicenseKey: AfcTWA//////AAABmUZ8yNppy0ZkjwHZFIwZ3CYhAJ9qxLdide0gWUVH0NIcSzCzz6t58iVGquwz14R7d9kOmSFMwypAqIT0gk4F888JDaPzCl4FYXkKkgnLf7VwaOeyR/6b0fiwS8GtJH21MEn4L9uSNV9N+FM2kN/HfQQChnh+9g/6a4lawjsHvBgA4A1Nl33aAHWfqXzwvp7+eb31VaQ6dNXgetDPewKBFGbkVrX/DKvD/7QYH1cQ5uI3trPAL9jO/eW+lQJq7/UjKnau0tq9D44iHBvesI8r52cT37LDwfMrDZVzbY3pW3E4Jhd69V+q2cwIlibg3/8jikGB0G4SQomp00r+TSUU9XdnfSnZ+0ZAAm2zctS4nUft
     ufoLicenseKey: QVpiNXBUci8vLy8vQUFBQUtJakZsK3NrczBibHR3OTE5U3hzU1dRR3o5aTF1VWdGaVl2Vk13aW9ZV242M2Iyc0hhbUNTMCt0VjF4U24zK1dBVSs3eG1FdjJESTc3WEZ3RjJUWitnUUtJZmM5dXU2NUNUMFFWaTVmM0lTL2FXaWpOVk9HS0RtQ1ZmVHd4c1hiaVM2SWkvYzNNcXhPeEhISE9KNU9RTUhKMDVXY1Z4K0tsVkx0UHRCaFBzNGY0cmtnMk9ldEo1dVF0a1Q4RXljY2VaRi9MSzduUUZ1MU1GWnIvVWpSa0hJVE40YkxFTWduZG1tMkhBNDZKT1p6dE52SEozTTF5aGFEdXYxRTF2UDZoTFJUSEplSmpLa0dvUDVwSURHd1Q0UE1RQ05MTXFwSTA0NDEyUjR5ZDlaRGN5bjZMTW1Md2lkWlVJVUxRN1RXRmNUa29YMEQvUGxVZENGREZnenArVUVnbjNTSjlkUExWT09SaFhhbyt2dDk=
     delayedInitialization: 0
     cameraDeviceModeSetting: -1
@@ -22,8 +22,8 @@ MonoBehaviour:
     useDelayedLoadingObjectTargets: 0
     cameraDirection: 0
     mirrorVideoBackground: 0
-    version: 7.5.26
-    eulaAcceptedVersions: '{"Values":["7.2","7.5"]}'
+    version: 8.0.10
+    eulaAcceptedVersions: '{"Values":["7.2","7.5","8.0"]}'
   digitalEyewear:
     cameraOffset: 0.06
     distortionRenderingLayer: 31
@@ -60,12 +60,11 @@ MonoBehaviour:
     modelCorrectionMode: 0
     modelTransformEnabled: 0
     modelTransform: {x: 0, y: 0.1, z: -0.1}
-    fusionMode: 7
   smartTerrain:
     autoInitTracker: 0
     autoStartTracker: 0
   webcam:
-    deviceNameSetInEditor: 
+    deviceNameSetInEditor: Microsoft Camera Rear
     flipHorizontally: 0
     turnOffWebCam: 0
     renderTextureLayer: 30
