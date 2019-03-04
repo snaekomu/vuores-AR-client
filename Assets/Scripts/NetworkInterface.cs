@@ -5,7 +5,14 @@ using UnityEngine.Networking;
 
 public class NetworkInterface : MonoBehaviour
 {
+    public const string ip = "localhost:3000";
+    public const string version = "v1";
 
+    public string Req(string ip, string version, string task, string arguments = "")
+    {
+        return ip + "/api/" + version + "/" + task + "/" + arguments + "/";
+    }
+    
     public void Get(string req, Action<String> Callback)
     {
         StartCoroutine(GetRoutine(req, Callback));

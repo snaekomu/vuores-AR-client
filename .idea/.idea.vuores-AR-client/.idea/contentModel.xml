@@ -14,6 +14,12 @@
           <e p="NetworkInterface.cs" t="Include" />
           <e p="UpdatableImage.cs" t="Include" />
         </e>
+        <e p="StreamingAssets" t="Include">
+          <e p="Vuforia" t="Include">
+            <e p="ar-horse.xml" t="Include" />
+            <e p="VuforiaMars_Images.xml" t="Include" />
+          </e>
+        </e>
         <e p="Vuforia" t="Include">
           <e p="Databases" t="Include">
             <e p="Emulator" t="Include">
@@ -50,9 +56,7 @@
       <e p="Library" t="ExcludeRecursive" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="packages" t="ExcludeRecursive" />
-      <e p="Temp" t="ExcludeRecursive">
-        <e p="bin" t="ExcludeRecursive" />
-      </e>
+      <e p="Temp\bin" t="ExcludeRecursive" />
       <e p="VuforiaEditorScripts.csproj" t="IncludeRecursive" />
       <e p="VuforiaScripts.csproj" t="IncludeRecursive" />
       <e p="vuores-AR-client.sln" t="IncludeFlat" />

@@ -5,12 +5,12 @@ using UnityEngine.UI;
 public class UpdatableImage : Image
 {
     public static List<int> AvailableImages = new List<int>();
-    [SerializeField] private Vector3 scale;
+    [SerializeField] private Vector3 scale = new Vector3(1f, -1f, 1f);
 
     //Set the correct scale on start
     private void Start()
     {
-        GetComponent<RectTransform>().localScale = scale;
+        //GetComponent<RectTransform>().localScale = scale;
     }
 
     //Set the list of available images
@@ -37,9 +37,9 @@ public class UpdatableImage : Image
         Debug.Log("Downloading images...");
         if (AvailableImages == null || AvailableImages.Count == 0)
         {
-            SetAvailableImages(db.DatabaseEntries.Count);
+            SetAvailableImages(GameObject.FindObjectsOfType<UpdatableImage>().Length);
         }
-        net.Get(db.DatabaseEntries[GetRandomEntry()].url, AssignSprite);
+        net.Get(NetworkInterface.ip + "/" + db.DatabaseEntries[GetRandomEntry()].url, AssignSprite);
     }
 
     public void AssignSprite(Texture2D tex)

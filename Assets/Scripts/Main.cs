@@ -15,7 +15,6 @@ public class Main : MonoBehaviour
     public void Awake()
     {
         self = this;
-        database.ClearList();
         ActionsList = new StepDelegate[]{
             GetDBInf,
             ReadDatabase,
