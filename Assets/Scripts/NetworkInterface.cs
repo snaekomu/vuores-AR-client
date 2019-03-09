@@ -7,10 +7,11 @@ public class NetworkInterface : MonoBehaviour
 {
     public const string ip = "localhost:3000";
     public const string version = "v1";
+    public const string sqldb = "elements";
 
     public string Req(string ip, string version, string task, string arguments = "")
     {
-        return ip + "/api/" + version + "/" + task + "/" + arguments + "/";
+        return ip + "/api/" + sqldb + "/" + task + "/" + arguments + "/";
     }
     
     public void Get(string req, Action<String> Callback)
