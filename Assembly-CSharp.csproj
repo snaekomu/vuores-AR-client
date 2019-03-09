@@ -59,7 +59,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Database.cs" />
     <Compile Include="Assets\Scripts\DatabaseEntry.cs" />
-    <Compile Include="Assets\Scripts\DatabaseInfo.cs" />
+    <Compile Include="Assets\Scripts\DatabaseMeta.cs" />
     <Compile Include="Assets\Scripts\Main.cs" />
     <Compile Include="Assets\Scripts\NetworkInterface.cs" />
     <Compile Include="Assets\Scripts\UpdatableImage.cs" />

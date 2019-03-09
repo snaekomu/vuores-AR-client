@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class Database : ScriptableObject
 {
-    public DatabaseInfo DatabaseInfo { get; private set; }
+    public DatabaseMeta DatabaseMeta { get; private set; }
     public DatabaseEntry[] DatabaseEntries { get; private set; }
 
     private void InitArray(int length)
@@ -17,7 +17,7 @@ public class Database : ScriptableObject
     {
         if (DatabaseEntries == null)
         {
-            InitArray(DatabaseInfo.length);
+            InitArray(DatabaseMeta.length);
         }
 
         DatabaseEntries[i] = entry;
@@ -27,28 +27,28 @@ public class Database : ScriptableObject
     {
         if (DatabaseEntries == null)
         {
-            InitArray(DatabaseInfo.length);
+            InitArray(DatabaseMeta.length);
         }
 
         DatabaseEntries = arr;
     }
 
-    public void SetDatabaseInfo(DatabaseInfo dbinf)
+    public void SetDatabaseInfo(DatabaseMeta dbmeta)
     {
-        DatabaseInfo = dbinf;
-        InitArray(DatabaseInfo.length);
+        DatabaseMeta = dbmeta;
+        InitArray(DatabaseMeta.length);
     }
 
-    public void GetDBInf(NetworkInterface net)
+    public void GetDBMeta(NetworkInterface net)
     {
         Debug.Log("Getting database information...");
-        net.Get(net.Req(NetworkInterface.ip, NetworkInterface.version, "dbinfo"), SaveDBInf);
+        net.Get(net.Req(NetworkInterface.ip, NetworkInterface.version, "meta", "all"), SaveDBMeta);
     }
 
-    private void SaveDBInf(string res)
+    private void SaveDBMeta(string res)
     {
-        SetDatabaseInfo(JsonUtility.FromJson<DatabaseInfo>(res));
-        //UpdatableImage.SetAvailableImages(DatabaseInfo.length);
+        SetDatabaseInfo(JsonUtility.FromJson<DatabaseMeta>(res));
+        //UpdatableImage.SetAvailableImages(DatabaseMeta.length);
         Debug.Log("Database information saved.");
         Main.Next();
     }
@@ -56,16 +56,16 @@ public class Database : ScriptableObject
     public void ReadDatabase(NetworkInterface net)
     {
         Debug.Log("Getting database entries...");
-        for (int i = 0; i < DatabaseInfo.idArray.Length; i++)
+        for (int i = 0; i < DatabaseMeta.idArray.Length; i++)
         {
-            net.Get(net.Req(NetworkInterface.ip, NetworkInterface.version, "select", "id=" + DatabaseInfo.idArray[i].ToString()), SaveDatabaseEntry);
+            net.Get(net.Req(NetworkInterface.ip, NetworkInterface.version, "select", "id=" + DatabaseMeta.idArray[i].ToString()), SaveDatabaseEntry);
         }
     }
     
     void SaveDatabaseEntry(string res)
     {
         DatabaseEntry e = JsonUtility.FromJson<DatabaseEntry>(res);
-        int i = Array.IndexOf(DatabaseInfo.idArray, e.id);
+        int i = Array.IndexOf(DatabaseMeta.idArray, e.id);
         AddDBEntry(i,e);
         if (Array.Exists(DatabaseEntries, element => element == null))
         {   

@@ -16,7 +16,7 @@ public class Main : MonoBehaviour
     {
         self = this;
         ActionsList = new StepDelegate[]{
-            GetDBInf,
+            GetDBMeta,
             ReadDatabase,
             GetTextures
         };
@@ -40,9 +40,9 @@ public class Main : MonoBehaviour
     }
 
     //Get the database information
-    private void GetDBInf()
+    private void GetDBMeta()
     {
-        database.GetDBInf(networkInterface);
+        database.GetDBMeta(networkInterface);
     }
 
     //Get whole database

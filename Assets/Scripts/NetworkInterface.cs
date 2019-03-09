@@ -11,7 +11,7 @@ public class NetworkInterface : MonoBehaviour
 
     public string Req(string ip, string version, string task, string arguments = "")
     {
-        return ip + "/api/" + sqldb + "/" + task + "/" + arguments + "/";
+        return ip + "/api/" + version + "/" + task + "/" + arguments + "/";
     }
     
     public void Get(string req, Action<String> Callback)
