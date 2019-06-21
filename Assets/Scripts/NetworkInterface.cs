@@ -1,17 +1,36 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public class NetworkInterface : MonoBehaviour
 {
-    public const string ip = "localhost:3000";
+    public const string ip = "http://vuores.snaekomu.xyz";
     public const string version = "v1";
-    public const string sqldb = "elements";
+    public const string dbName = "ar_api";
 
-    public string Req(string ip, string version, string task, string arguments = "")
+    public static NetworkInterface instance;
+
+    public void Awake() {
+        instance = this;
+    }
+
+    public string Req(string ip, string version, string query)
     {
-        return ip + "/api/" + version + "/" + task + "/" + arguments + "/";
+        return ip + "/api/" + version + "/" + query;
+    }
+
+    public string Query(Dictionary<string, string> fields)
+    {
+        string o = "?";
+
+        foreach (var pair in fields)
+        {
+            o += pair.Key + "=" + pair.Value + "&";
+        }
+
+        return o;
     }
     
     public void Get(string req, Action<String> Callback)
@@ -47,11 +66,19 @@ public class NetworkInterface : MonoBehaviour
  
         if(uwr.isNetworkError || uwr.isHttpError)
         {
-            Debug.Log(uwr.error);
+            
         }
         else
         {
-            Callback(DownloadHandlerTexture.GetContent(uwr));
+            Texture2D t = DownloadHandlerTexture.GetContent(uwr);
+            if (t == null)
+            {
+                Debug.Log("bad error texture null what happened");
+            }
+            else
+            {
+                Callback(t);
+            }
         }
     }
 }
