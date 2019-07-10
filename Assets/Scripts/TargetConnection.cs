@@ -1,28 +1,35 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Vuforia;
 
 public class TargetConnection : MonoBehaviour
-{   
-    private string id;
-    private Query query;
-    private NetworkInterface net;
+{
+    [SerializeField] private ImageTargetBehaviour target;
+    private string targetName;
+    private GameObject imagePrefab;
+    [SerializeField] private NetworkInterface net;
 
     public void Awake() {
-        id = "a";
-        query.Add("target", id);
+        imagePrefab = Resources.Load("Prefabs/Image") as GameObject;
+
+        if (!net) { net = gameObject.GetComponent<NetworkInterface>(); }
+        if (!net) { net = gameObject.AddComponent<NetworkInterface>(); }
+        if (!target) { target = gameObject.GetComponent<ImageTargetBehaviour>(); }
+        
+        targetName = target.name;
     }
 
     public void Start() {
-        net = NetworkInterface.instance;
-        DownloadImages();
+        GetData();
     }
 
-    private void DownloadImages() {
-        net.Get(query.Url, SpawnImages);
+    private void GetData() {
+        net.Get<ContentModel.Array>(NetworkInterface.Request("api/v1/target/contents", "name", targetName, "asObject", "true"), SpawnImages);
     }
 
-    private void SpawnImages(string s) {
-        
+    private void SpawnImages(ContentModel.Array res) {
+        foreach (var element in res.elements)
+        {
+            (Instantiate(imagePrefab, transform) as GameObject).GetComponentInChildren<ImageConnection>().DownloadTexture(net, element.url);
+        }
     }
 }
