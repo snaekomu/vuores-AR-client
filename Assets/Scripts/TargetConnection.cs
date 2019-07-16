@@ -23,7 +23,8 @@ public class TargetConnection : MonoBehaviour
     }
 
     private void GetData() {
-        net.Get<ContentModel.Array>(NetworkInterface.Request("api/v1/target/contents", "name", targetName, "asObject", "true"), SpawnImages);
+        Request req = Request.New("api", Request.version, "target", "contents")("name", targetName, "asObject", "true");
+        net.Get<ContentModel.Array>(req.Uri, SpawnImages);
     }
 
     private void SpawnImages(ContentModel.Array res) {
