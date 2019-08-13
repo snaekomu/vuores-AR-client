@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 public class Request
 {
-    public static string host {get; private set;} = "http://localhost";
+    public static string host {get; private set;} = "http://localhost:3001";
     public static string version {get; private set;} = "v1";
     private string[] path;
     private KeyValuePair<string, string>[] query;
@@ -37,7 +37,7 @@ public class Request
     {
         get 
         {
-            return (query != null || query.Length > 0) ? Path + Query : Path;
+            return string.Format("{0}/{1}{2}", host, Path, (query != null || query.Length > 0) ? Query : "");
         }
     }
 }

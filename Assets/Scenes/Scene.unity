@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -357,34 +357,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!21 &1134592193
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'horse2Material
-
-    14970'
-  m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 5
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 2800000, guid: f518c290005c4b808d2a56e4ce2b7e0d, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats: []
-    m_Colors:
-    - _Color: {r: 0.82089555, g: 0.82089555, b: 0.82089555, a: 1}
 --- !u!1 &1281798964
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,7 +373,7 @@ GameObject:
   - component: {fileID: 1281798965}
   - component: {fileID: 1281798971}
   m_Layer: 0
-  m_Name: ImageTarget
+  m_Name: horse2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -414,7 +386,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1281798964}
-  m_Mesh: {fileID: 1556719670}
+  m_Mesh: {fileID: 1499939873}
 --- !u!23 &1281798966
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -432,7 +404,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1134592193}
+  - {fileID: 2088290354}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -488,14 +460,14 @@ MonoBehaviour:
   m_Script: {fileID: -1631628248, guid: bab6fa851cf5a1a4bba3cec5f191cb8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mTrackableName: horse2
+  mTrackableName: lcdle
   mPreserveChildSize: 0
   mInitializedInEditor: 1
   mDataSetPath: Vuforia/ar-horse.xml
-  mAspectRatio: 1.3333335
+  mAspectRatio: 1.6778532
   mImageTargetType: 0
-  mWidth: 2
-  mHeight: 2.666667
+  mWidth: 0.15
+  mHeight: 0.251678
 --- !u!4 &1281798970
 Transform:
   m_ObjectHideFlags: 0
@@ -505,7 +477,7 @@ Transform:
   m_GameObject: {fileID: 1281798964}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.666667, y: 2.666667, z: 2.666667}
+  m_LocalScale: {x: 0.251678, y: 0.251678, z: 0.251678}
   m_Children:
   - {fileID: 3009560687538869331}
   m_Father: {fileID: 0}
@@ -518,18 +490,20 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1281798964}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a5f4348976351a4da2e7bc90f984dd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!43 &1556719670
+  target: {fileID: 0}
+  net: {fileID: 0}
+--- !u!43 &1499939873
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ImageTargetMesh14960
+  m_Name: ImageTargetMesh11488
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -541,7 +515,7 @@ Mesh:
     vertexCount: 4
     localAABB:
       m_Center: {x: 0, y: 0, z: 0}
-      m_Extent: {x: 0.37499997, y: 0, z: 0.5}
+      m_Extent: {x: 0.29799986, y: 0, z: 0.5}
   m_Shapes:
     vertices: []
     shapes: []
@@ -617,7 +591,7 @@ Mesh:
       format: 0
       dimension: 0
     m_DataSize: 128
-    _typelessdata: ffffbfbe00000000000000bf000000000000803f000000000000000000000000ffffbfbe000000000000003f000000000000803f00000000000000000000803fffffbf3e00000000000000bf000000000000803f000000000000803f00000000ffffbf3e000000000000003f000000000000803f000000000000803f0000803f
+    _typelessdata: 709398be00000000000000bf000000000000803f000000000000000000000000709398be000000000000003f000000000000803f00000000000000000000803f7093983e00000000000000bf000000000000803f000000000000803f000000007093983e000000000000003f000000000000803f000000000000803f0000803f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -683,6 +657,34 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!21 &2088290354
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'lcdleMaterial
+
+    11498'
+  m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: ceb0f80683cb4579acf074e228de24d7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats: []
+    m_Colors:
+    - _Color: {r: 0.82089555, g: 0.82089555, b: 0.82089555, a: 1}
 --- !u!114 &94308072591766992
 MonoBehaviour:
   m_ObjectHideFlags: 0

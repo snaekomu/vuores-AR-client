@@ -23,14 +23,14 @@ public class TargetConnection : MonoBehaviour
     }
 
     private void GetData() {
-        Request req = Request.New("api", Request.version, "target", "contents")("name", targetName, "asObject", "true");
-        net.Get<ContentModel.Array>(req.Uri, SpawnImages);
+        Request req = Request.New("api", Request.version, "target")("name", targetName);
+        net.Get<Models.Target>(req.Uri, SpawnImages);
     }
 
-    private void SpawnImages(ContentModel.Array res) {
-        foreach (var element in res.elements)
+    private void SpawnImages(Models.Target res) {
+        foreach (var content in res.gallery.contents)
         {
-            (Instantiate(imagePrefab, transform) as GameObject).GetComponentInChildren<ImageConnection>().DownloadTexture(net, element.url);
+            (Instantiate(imagePrefab, transform) as GameObject).GetComponentInChildren<ImageConnection>().DownloadTexture(net, content.file.url);
         }
     }
 }
