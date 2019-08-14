@@ -372,6 +372,7 @@ GameObject:
   - component: {fileID: 1281798966}
   - component: {fileID: 1281798965}
   - component: {fileID: 1281798971}
+  - component: {fileID: 1281798972}
   m_Layer: 0
   m_Name: horse2
   m_TagString: Untagged
@@ -460,14 +461,14 @@ MonoBehaviour:
   m_Script: {fileID: -1631628248, guid: bab6fa851cf5a1a4bba3cec5f191cb8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mTrackableName: lcdle
+  mTrackableName: horse2
   mPreserveChildSize: 0
   mInitializedInEditor: 1
   mDataSetPath: Vuforia/ar-horse.xml
-  mAspectRatio: 1.6778532
+  mAspectRatio: 1.3333335
   mImageTargetType: 0
-  mWidth: 0.15
-  mHeight: 0.251678
+  mWidth: 2
+  mHeight: 2.666667
 --- !u!4 &1281798970
 Transform:
   m_ObjectHideFlags: 0
@@ -477,7 +478,7 @@ Transform:
   m_GameObject: {fileID: 1281798964}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.251678, y: 0.251678, z: 0.251678}
+  m_LocalScale: {x: 2.666667, y: 2.666667, z: 2.666667}
   m_Children:
   - {fileID: 3009560687538869331}
   m_Father: {fileID: 0}
@@ -497,6 +498,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   net: {fileID: 0}
+--- !u!114 &1281798972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281798964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c714f1cde27bd44dc8083d62ab255067, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 2
+  height: 2
+  limit: 10
 --- !u!43 &1499939873
 Mesh:
   m_ObjectHideFlags: 0
@@ -515,7 +531,7 @@ Mesh:
     vertexCount: 4
     localAABB:
       m_Center: {x: 0, y: 0, z: 0}
-      m_Extent: {x: 0.29799986, y: 0, z: 0.5}
+      m_Extent: {x: 0.37499997, y: 0, z: 0.5}
   m_Shapes:
     vertices: []
     shapes: []
@@ -591,7 +607,7 @@ Mesh:
       format: 0
       dimension: 0
     m_DataSize: 128
-    _typelessdata: 709398be00000000000000bf000000000000803f000000000000000000000000709398be000000000000003f000000000000803f00000000000000000000803f7093983e00000000000000bf000000000000803f000000000000803f000000007093983e000000000000003f000000000000803f000000000000803f0000803f
+    _typelessdata: ffffbfbe00000000000000bf000000000000803f000000000000000000000000ffffbfbe000000000000003f000000000000803f00000000000000000000803fffffbf3e00000000000000bf000000000000803f000000000000803f00000000ffffbf3e000000000000003f000000000000803f000000000000803f0000803f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -664,7 +680,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 'lcdleMaterial
+  m_Name: 'horse2Material
 
     11498'
   m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
@@ -679,7 +695,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: ceb0f80683cb4579acf074e228de24d7, type: 3}
+        m_Texture: {fileID: 2800000, guid: f518c290005c4b808d2a56e4ce2b7e0d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats: []
@@ -857,4 +873,4 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0

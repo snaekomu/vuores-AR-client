@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\ImageConnection.cs" />
+     <Compile Include="Assets\Scripts\ImagePlacer.cs" />
      <Compile Include="Assets\Scripts\Models.cs" />
      <Compile Include="Assets\Scripts\NetworkInterface.cs" />
      <Compile Include="Assets\Scripts\Request.cs" />

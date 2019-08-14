@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 public class Request
 {
-    public static string host {get; private set;} = "http://localhost:3001";
+    public static string host {get; private set;} = "http://snaekomu.xyz:3000/";
     public static string version {get; private set;} = "v1";
     private string[] path;
     private KeyValuePair<string, string>[] query;
